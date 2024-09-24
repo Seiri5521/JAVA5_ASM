@@ -49,80 +49,55 @@
     </div>
   </section>
 
-  <section class="ftco-section ftco-no-pb">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="search-wrap-1 ftco-animate">
-            <form action="#" class="search-property-1">
-              <div class="row no-gutters">
-                <div class="col-lg d-flex">
-                  <div class="form-group p-4 border-0">
-                    <label for="#">Điểm đến</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="fa fa-search"></span></div>
-                      <input type="text" class="form-control" placeholder="Tìm kiếm địa điểm">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg d-flex">
-                  <div class="form-group p-4">
-                    <label for="#">Ngày nhận phòng</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="fa fa-calendar"></span></div>
-                      <input type="text" class="form-control checkin_date" placeholder="Ngày nhận phòng">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg d-flex">
-                  <div class="form-group p-4">
-                    <label for="#">Ngày trả phòng</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="fa fa-calendar"></span></div>
-                      <input type="text" class="form-control checkout_date" placeholder="Ngày trả phòng">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg d-flex">
-                  <div class="form-group p-4">
-                    <label for="#">Giới hạn giá</label>
-                    <div class="form-field">
-                      <div class="select-wrap">
-                        <div class="icon"><span class="fa fa-chevron-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">120,000 VND</option>
-                          <option value="">240,000 VND</option>
-                          <option value="">1,200,000 VND</option>
-                          <option value="">2,400,000 VND</option>
-                          <option value="">4,800,000 VND</option>
-                          <option value="">7,200,000 VND</option>
-                          <option value="">9,600,000 VND</option>
-                          <option value="">12,000,000 VND</option>
-                          <option value="">14,400,000 VND</option>
-                          <option value="">16,800,000 VND</option>
-                          <option value="">19,200,000 VND</option>
-                          <option value="">21,600,000 VND</option>
-                          <option value="">24,000,000 VND</option>
-                          <option value="">48,000,000 VND</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg d-flex">
-                  <div class="form-group d-flex w-100 border-0">
-                    <div class="form-field w-100 align-items-center d-flex">
-                      <input type="submit" value="Tìm kiếm" class="align-self-stretch form-control btn btn-primary">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+	<!-- Booking Start -->
+	<div class="container-fluid booking mt-5 pb-5">
+		<div class="container pb-5">
+			<div class="bg-light shadow" style="padding: 30px;">
+				<form method="get" action="" class="row align-items-center"
+					style="min-height: 60px;">
+					<div class="col-md-10">
+						<div class="row">
+
+							<div class="col-md-4">
+								<div class="mb-3 mb-md-0">
+									<div class="date" id="date1" data-target-input="nearest">
+										<input type="text"
+											   class="form-control p-4 datetimepicker-input"
+											   placeholder="Ngày khởi hành" name="ngay_khoi_hanh" data-target="#date1"
+											   data-toggle="datetimepicker" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3 mb-md-0">
+									<div>
+										<input name="ten_tour" type="text" class="form-control p-4 "
+											placeholder="Điểm đến" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3 mb-md-0">
+									<select name="gia_tour" class="custom-select px-4"
+										style="height: 47px;">
+										<option value="0" selected>Mức giá</option>
+										<option value="1">Dưới 10 triệu</option>
+										<option value="2">10 triệu đến 50 triệu</option>
+										<option value="3">Trên 50 triệu</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary btn-block" type="submit"
+							style="height: 47px; margin-top: -2px;">Tìm kiếm</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Booking End -->
 
   <section class="ftco-section">
     <div class="container">
