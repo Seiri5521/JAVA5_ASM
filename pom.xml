@@ -84,6 +84,17 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>11.2.0.jre17</version> <!-- Kiểm tra phiên bản mới nhất tại
+			https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		</dependency>
+		<dependency>
+			<groupId>com.hoangminh</groupId>
+			<artifactId>ASM1</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

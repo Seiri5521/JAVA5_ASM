@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<title>Tour Miền Nam</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="public/css/animate.css">
+
+<link rel="stylesheet" href="public/css/owl.carousel.min.css">
+<link rel="stylesheet" href="public/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="public/css/magnific-popup.css">
+
+<link rel="stylesheet" href="public/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="public/css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="public/css/flaticon.css">
+<link href="public/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div th:replace="user/header :: header"></div>
+
+  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('public/images/bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+        <div class="col-md-9 ftco-animate pb-5 text-center">
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ <i
+                  class="fa fa-chevron-right"></i></a></span> <span>Điểm đến <i class="fa fa-chevron-right"></i></span>
+          </p>
+          <h1 class="mb-0 bread">Danh sách các tour</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section ftco-no-pb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="search-wrap-1 ftco-animate">
+            <form action="#" class="search-property-1">
+              <div class="row no-gutters">
+                <div class="col-lg d-flex">
+                  <div class="form-group p-4 border-0">
+                    <label for="#">Điểm đến</label>
+                    <div class="form-field">
+                      <div class="icon"><span class="fa fa-search"></span></div>
+                      <input type="text" class="form-control" placeholder="Tìm kiếm địa điểm">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg d-flex">
+                  <div class="form-group p-4">
+                    <label for="#">Ngày nhận phòng</label>
+                    <div class="form-field">
+                      <div class="icon"><span class="fa fa-calendar"></span></div>
+                      <input type="text" class="form-control checkin_date" placeholder="Ngày nhận phòng">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg d-flex">
+                  <div class="form-group p-4">
+                    <label for="#">Ngày trả phòng</label>
+                    <div class="form-field">
+                      <div class="icon"><span class="fa fa-calendar"></span></div>
+                      <input type="text" class="form-control checkout_date" placeholder="Ngày trả phòng">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg d-flex">
+                  <div class="form-group p-4">
+                    <label for="#">Giới hạn giá</label>
+                    <div class="form-field">
+                      <div class="select-wrap">
+                        <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                        <select name="" id="" class="form-control">
+                          <option value="">120,000 VND</option>
+                          <option value="">240,000 VND</option>
+                          <option value="">1,200,000 VND</option>
+                          <option value="">2,400,000 VND</option>
+                          <option value="">4,800,000 VND</option>
+                          <option value="">7,200,000 VND</option>
+                          <option value="">9,600,000 VND</option>
+                          <option value="">12,000,000 VND</option>
+                          <option value="">14,400,000 VND</option>
+                          <option value="">16,800,000 VND</option>
+                          <option value="">19,200,000 VND</option>
+                          <option value="">21,600,000 VND</option>
+                          <option value="">24,000,000 VND</option>
+                          <option value="">48,000,000 VND</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg d-flex">
+                  <div class="form-group d-flex w-100 border-0">
+                    <div class="form-field w-100 align-items-center d-flex">
+                      <input type="submit" value="Tìm kiếm" class="align-self-stretch form-control btn btn-primary">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-1.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">8 ngày du lịch</span>
+              <h3><a href="#">Ruộng bậc thang Sa Pa</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Sa Pa, Lào Cai, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-mountains"></span>Gần núi</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-2.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">10 ngày du lịch</span>
+              <h3><a href="#">Vịnh Hạ Long</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Hạ Long, Quảng Ninh, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-3.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">7 ngày du lịch</span>
+              <h3><a href="#">Phố cổ Hội An</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Hội An, Quảng Nam, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-4.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">8 ngày du lịch</span>
+              <h3><a href="#">Đảo Phú Quốc</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Phú Quốc, Kiên Giang, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-5.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">10 ngày du lịch</span>
+              <h3><a href="#">Thác Bản Giốc</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Cao Bằng, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-6.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">7 ngày du lịch</span>
+              <h3><a href="#">Cố đô Huế</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Huế, Thừa Thiên Huế, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-7.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">7 ngày du lịch</span>
+              <h3><a href="#">Biển Nha Trang</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Nha Trang, Khánh Hòa, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-8.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">7 ngày du lịch</span>
+              <h3><a href="#">Đảo Cát Bà</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Cát Bà, Hải Phòng, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url(public/images/destination-9.jpg);">
+              <span class="price">13,200,000 VND/người</span>
+            </a>
+            <div class="text p-4">
+              <span class="days">7 ngày du lịch</span>
+              <h3><a href="#">Động Phong Nha</a></h3>
+              <p class="location"><span class="fa fa-map-marker"></span> Phong Nha, Quảng Bình, Việt Nam</p>
+              <ul>
+                <li><span class="flaticon-shower"></span>2</li>
+                <li><span class="flaticon-king-size"></span>3</li>
+                <li><span class="flaticon-sun-umbrella"></span>Gần biển</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col text-center">
+          <div class="block-27">
+            <ul>
+              <li><a href="#">&lt;</a></li>
+              <li class="active"><span>1</span></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#">&gt;</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-intro ftco-section ftco-no-pt">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+          <div class="img" style="background-image: url(public/images/bg_2.jpg);">
+            <div class="overlay"></div>
+            <h2>Chúng Tôi Là Pacific, Một Đại Lý Du Lịch</h2>
+            <p>Chúng tôi có thể quản lý ước mơ của bạn, xây dựng một con đường đi đến những nơi khắp mọi miền tổ quốc Việt Nam</p>
+            <p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Yêu Cầu Báo Giá</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<div th:replace="user/footer :: footer"></div>
+
+	<!-- loader -->
+	 	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+				stroke="#F96D00" />
+		</svg></div> 
+
+
+	<script src="/public/js/jquery.min.js"></script>
+	<script src="/public/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/public/js/popper.min.js"></script>
+	<script src="/public/js/bootstrap.min.js"></script>
+	<script src="/public/js/jquery.easing.1.3.js"></script>
+	<script src="/public/js/jquery.waypoints.min.js"></script>
+	<script src="/public/js/jquery.stellar.min.js"></script>
+	<script src="/public/js/owl.carousel.min.js"></script>
+	<script src="/public/js/jquery.magnific-popup.min.js"></script>
+	<script src="/public/js/jquery.animateNumber.min.js"></script>
+	<script src="/public/js/bootstrap-datepicker.js"></script>
+	<script src="/public/js/scrollax.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="/public/js/google-map.js"></script>
+	<script src="/public/js/main.js"></script>
+
+</body>
+
+</html>
