@@ -14,7 +14,6 @@
     <link href="/public/admin/css/styles.css" rel="stylesheet" />
 <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>-->
     <script src="/public/admin/js/moment.min.js"></script>
-    /* Kindly upvote this answer if it helped you. */
     <style>
         label {
             padding: 10px 0;
@@ -202,8 +201,9 @@
                                             <div class="form-group">
                                                 <label for="loai_tour">Loại tour</label>
                                                 <select class="form-control" name="loai_tour">
-                                                    <option value="1">Tour trong nước</option>
-                                                    <option value="2">Tour nước ngoài</option>
+                                                    <option value="1">Tour miền nam</option>
+                                                    <option value="2">Tour miền trung</option>
+                                                    <option value="3">Tour miền bắc</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -278,8 +278,9 @@
                                             <div class="form-group">
                                                 <label for="loai_tour">Loại tour</label>
                                                 <select class="form-control" id="loai_tour" name="loai_tour">
-                                                    <option value="1">Tour trong nước</option>
-                                                    <option value="2">Tour nước ngoài</option>
+                                                    <option value="1">Tour miền nam</option>
+                                                    <option value="2">Tour miền trung</option>
+                                                    <option value="3">Tour miền bắc</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -646,13 +647,16 @@
                 { "data": "loai_tour","render": function (data, type, row, meta) {
                         switch (data) {
                             case 1:
-                                return "Trong nước" ;
+                                return "Miền Nam" ;
                                 break;
                             case 2:
-                                return "Ngoài nước"
+                                return "Miền Trung"
+                                break;
+                            case 3:
+                                return "Miền Bắc"
                                 break;
                             default:
-                                return "Trong nước";
+                                return "Chưa phân loại";
                         }
                     }
                 },
