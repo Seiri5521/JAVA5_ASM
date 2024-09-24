@@ -91,6 +91,7 @@
 			<scope>test</scope><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
@@ -112,7 +113,7 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>6.3.3</version>
 		</dependency>
-
+    
 	</dependencies>
 
 	<build>
