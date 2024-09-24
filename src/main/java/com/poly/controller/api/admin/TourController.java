@@ -83,7 +83,7 @@ public class TourController {
             return new ResponseDTO("Không có quyền truy cập",null);
         }
 
-        String uploadDir = "HoangMinhWeb/src/main/resources/static/public/img";
+        String uploadDir = "TourIMG/src/main/resources/static/public/img";
 
         try {
             // Lưu ảnh vào thư mục "upload"
@@ -105,7 +105,7 @@ public class TourController {
             return new ResponseDTO("Không có quyền truy cập",null);
         }
 
-        String uploadDir = "HoangMinhWeb/src/main/resources/static/public/img";
+        String uploadDir = "TourIMG/src/main/resources/static/public/img";
 
         Tour tour = tourService.findFirstByOrderByIdDesc();
 
@@ -152,7 +152,7 @@ public class TourController {
             return new ResponseDTO("Không có quyền truy cập",null);
         }
 
-        String uploadDir = "HoangMinhWeb/src/main/resources/static/public/img";
+        String uploadDir = "TourIMG/src/main/resources/static/public/img";
 
         TourDTO tourDTO = this.tourService.findTourById(id);
         try {
@@ -226,7 +226,7 @@ public class TourController {
             return new ResponseDTO("Không có quyền truy cập",null);
         }
 
-        String uploadDir = "HoangMinhWeb/src/main/resources/static/public/img";
+        String uploadDir = "TourIMG/src/main/resources/static/public/img";
 
         try {
             // Lưu ảnh vào thư mục "upload"
