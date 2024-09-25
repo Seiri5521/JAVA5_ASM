@@ -473,12 +473,12 @@ public class HomeController {
 	public String news() {
 		return "/user/tin-tuc";
 	}
+	@GetMapping("/tin-tuc1")
+	public String news1() {
+		return "/user/tin-tuc1";
+	}
 	@GetMapping("/contact")
 	public String contact() {
 		return "/user/contact";
 	}
-//	@GetMapping("/tour3")
-//	public String tour3() {
-//		return "/user/tour3";
-//	}
 }
