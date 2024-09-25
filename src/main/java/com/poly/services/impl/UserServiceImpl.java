@@ -3,11 +3,11 @@ package com.poly.services.impl;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.poly.dto.ChangePasswordDTO;
@@ -28,228 +28,206 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private BookingRepository bookingRepository;
 
-	@Autowired
-	private BookingRepository bookingRepository;
+    // Sử dụng BCryptPasswordEncoder của Spring Security
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-	@Override
-	public Page<UserDTO> findAllUser(String sdt,String email,String ho_ten,Pageable pageable) {
+    @Override
+    public Page<UserDTO> findAllUser(String sdt, String email, String ho_ten, Pageable pageable) {
+        Page<User> page = userRepository.findAll(sdt, email, ho_ten, pageable);
 
-		Page<User> page = userRepository.findAll(sdt,email,ho_ten,pageable);
+        Page<UserDTO> pageUserDTO = new PageImpl<>(
+            page.getContent().stream().map(user -> ConvertUserToDto.convertUsertoDto(user))
+                .collect(Collectors.toList()),
+            page.getPageable(),
+            page.getTotalElements()
+        );
 
-		Page<UserDTO> pageUserDTO = new PageImpl<>(
-			page.getContent().stream().map(user ->  {
+        return pageUserDTO;
+    }
 
-				UserDTO userDTO = ConvertUserToDto.convertUsertoDto(user);
-				return userDTO;
-			}).collect(Collectors.toList()),
-				page.getPageable(),
-				page.getTotalElements()
-		);
+    @Override
+    public User findUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.orElse(null);
+    }
 
-		return pageUserDTO;
-	}
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
-	@Override
-	public User findUserById(Long id) {
-		Optional<User> user = userRepository.findById(id);
-		if(user.isPresent()) {
-			return user.get();
-		}
-		return null;
-	}
+    @Override
+    public boolean saveUser(User user) {
+        return userRepository.save(user) != null;
+    }
 
-	@Override
-	public User findUserByUsername(String username) {
-		User user = userRepository.findByUsername(username);
-		if(user!=null) {
-			return user;
-		}
-		return null;
-	}
+    @Override
+    public boolean updateUser(UpdateUserDTO updateUserDTO) {
+        if (SessionUtilities.getUser() != null) {
+            Long userId = SessionUtilities.getUser().getId();
 
-	@Override
-	public boolean saveUser(User user) {
-		if(this.userRepository.save(user)!=null) {
-			return true;
-		}
-		return false;
-	}
+            User user = userRepository.findById(userId).orElse(null);
+            if (user == null) return false;
 
-	@Override
-	public boolean updateUser(UpdateUserDTO updateUserDTO) {
-		if(SessionUtilities.getUser()!=null) {
-			Long user_id = SessionUtilities.getUser().getId();
+            user.setSdt(updateUserDTO.getSdt());
+            user.setUsername(updateUserDTO.getUsername());
+            user.setEmail(updateUserDTO.getEmail());
+            user.setDia_chi(updateUserDTO.getDia_chi());
+            user.setHo_ten(updateUserDTO.getHo_ten());
+            user.setGioi_tinh(updateUserDTO.getGioi_tinh());
 
-			User user = this.userRepository.findById(user_id).get();
+            userRepository.save(user);
+            SessionUtilities.setUser(ConvertUserToDto.convertUsertoDto(user));
 
-			user.setSdt(updateUserDTO.getSdt());
-			user.setUsername(updateUserDTO.getUsername());
-			user.setEmail(updateUserDTO.getEmail());
-			user.setDia_chi(updateUserDTO.getDia_chi());
-			user.setHo_ten(updateUserDTO.getHo_ten());
-			user.setGioi_tinh(updateUserDTO.getGioi_tinh());
+            return true;
+        }
 
-			this.userRepository.save(user);
+        return false;
+    }
 
-			SessionUtilities.setUser(ConvertUserToDto.convertUsertoDto(user));
+    @Override
+    public boolean deleteUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent() && (bookingRepository.findBookingByUserId(id) == null || bookingRepository.findBookingByUserId(id).isEmpty())) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
-			return true;
+    @Override
+    public boolean login(LoginDTO user) {
+        User userCheck = findUserByUsername(user.getUsername());
 
-		}
+        if (userCheck == null) {
+            return false;
+        }
 
-		return false;
-	}
+        log.info("userCheck:{}", userCheck.getUsername());
 
-	@Override
-	public boolean deleteUserById(Long id) {
-		Optional<User> user = this.userRepository.findById(id);
-		if(user.isPresent()) {
-			if(this.bookingRepository.findBookingByUserId(id)==null || this.bookingRepository.findBookingByUserId(id).size()==0) {
-				this.userRepository.deleteById(id);
-				return true;
-			}
-		}
-		return false;
-	}
+        // Sử dụng BCryptPasswordEncoder để kiểm tra mật khẩu
+        if (passwordEncoder.matches(user.getPassword(), userCheck.getPassword())) {
+            SessionUtilities.setUsername(userCheck.getUsername());
+            SessionUtilities.setUser(ConvertUserToDto.convertUsertoDto(userCheck));
 
-	@Override
-	public boolean login(LoginDTO user) {
+            log.info("userCheck:{}", SessionUtilities.getUsername());
+            return true;
+        }
 
-		User userCheck = this.findUserByUsername(user.getUsername());
+        return false;
+    }
 
-		if(userCheck==null) {
-			return false;
-		}
+    @Override
+    public boolean register(RegisterDTO newUser) {
+        User userCheckByUserName = findUserByUsername(newUser.getUsername());
+        User userCheckByEmail = userRepository.getUserByEmail(newUser.getEmail());
 
-		log.info("userCheck:{}",userCheck.getUsername());
+        if (userCheckByUserName != null || userCheckByEmail != null) {
+            return false;
+        }
 
-		if(BCrypt.checkpw(user.getPassword(), userCheck.getPassword())) {
-			SessionUtilities.setUsername(userCheck.getUsername());
-			SessionUtilities.setUser(ConvertUserToDto.convertUsertoDto(userCheck));
+        User user = new User();
+        user.setUsername(newUser.getUsername());
+        user.setHo_ten(newUser.getHo_ten());
+        user.setPassword(passwordEncoder.encode(newUser.getPassword())); // Mã hóa mật khẩu
+        user.setEmail(newUser.getEmail());
+        user.setGioi_tinh(newUser.getGioi_tinh());
+        user.setRole(1);
+        user.setDia_chi(newUser.getDia_chi());
+        user.setSdt(newUser.getSdt());
 
-			log.info("userCheck:{}",SessionUtilities.getUsername());
-			return true;
-		}
+        return saveUser(user);
+    }
 
+    @Override
+    public boolean checkLogin() {
+        return SessionUtilities.getUsername() != null;
+    }
 
-		return false;
-	}
+    @Override
+    public boolean changePassword(ChangePasswordDTO changePasswordDTO) {
+        if (SessionUtilities.getUser() != null) {
+            Long userId = SessionUtilities.getUser().getId();
 
-	@Override
-	public boolean register(RegisterDTO newUser) {
+            User user = userRepository.findById(userId).orElse(null);
+            if (user == null) return false;
 
-		User userCheckByUserName = this.findUserByUsername(newUser.getUsername());
-		User userCheckByEmail = this.userRepository.getUserByEmail(newUser.getEmail());
-		if(userCheckByUserName!=null || userCheckByEmail!=null) {
-			return false;
-		}
+            // Kiểm tra và mã hóa mật khẩu mới
+            if (passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword()) && changePasswordDTO.getNewPassword() != null) {
+                user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
+                userRepository.save(user);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
-		User user= new User();
-		user.setUsername(newUser.getUsername());
-		user.setHo_ten(newUser.getHo_ten());
-		user.setPassword(BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt(10)));
-		user.setEmail(newUser.getEmail());
-		user.setGioi_tinh(newUser.getGioi_tinh());
-		user.setRole(1);
-		user.setDia_chi(newUser.getDia_chi());
-		user.setSdt(newUser.getSdt());
+    @Override
+    public boolean updateUserByAdmin(UpdateUserDTO updateUserDTO, Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setSdt(updateUserDTO.getSdt());
+            user.setUsername(updateUserDTO.getUsername());
+            user.setEmail(updateUserDTO.getEmail());
+            user.setDia_chi(updateUserDTO.getDia_chi());
+            user.setHo_ten(updateUserDTO.getHo_ten());
+            user.setGioi_tinh(updateUserDTO.getGioi_tinh());
 
+            userRepository.save(user);
 
-		return this.saveUser(user);
-	}
+            return true;
+        }
 
-	@Override
-	public boolean checkLogin() {
-		return SessionUtilities.getUsername()!=null;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean changePassword(ChangePasswordDTO changePasswordDTO) {
-		if(SessionUtilities.getUser()!=null) {
-			Long user_id = SessionUtilities.getUser().getId();
+    @Override
+    public boolean adminLogin(LoginDTO user) {
+        User userCheck = findUserByUsername(user.getUsername());
 
-			User user = this.userRepository.findById(user_id).get();
+        if (userCheck == null) {
+            return false;
+        }
 
-			if(BCrypt.checkpw(changePasswordDTO.getOldPassword(),user.getPassword()) && changePasswordDTO.getNewPassword()!=null) {
-				user.setPassword(BCrypt.hashpw(changePasswordDTO.getNewPassword(), BCrypt.gensalt(10)));
-				this.userRepository.save(user);
-				return true;
-			}
-			return false;
+        log.info("userCheck:{}", userCheck.getUsername());
 
-		}
-		return false;
-	}
+        // Kiểm tra mật khẩu và quyền admin
+        if (passwordEncoder.matches(user.getPassword(), userCheck.getPassword()) && userCheck.getRole() == 0) {
+            SessionUtilities.setAdmin(ConvertUserToDto.convertUsertoDto(userCheck));
 
-	@Override
-	public boolean updateUserByAdmin(UpdateUserDTO updateUserDTO,Long id) {
+            log.info("userCheck:{}", SessionUtilities.getAdmin().getUsername());
 
-		User user = this.userRepository.findById(id).get();
-		if(user!=null) {
-			user.setSdt(updateUserDTO.getSdt());
-			user.setUsername(updateUserDTO.getUsername());
-			user.setEmail(updateUserDTO.getEmail());
-			user.setDia_chi(updateUserDTO.getDia_chi());
-			user.setHo_ten(updateUserDTO.getHo_ten());
-			user.setGioi_tinh(updateUserDTO.getGioi_tinh());
+            return true;
+        }
 
-			this.userRepository.save(user);
+        return false;
+    }
 
-			return true;
-		}
+    @Override
+    public boolean checkAdminLogin() {
+        return SessionUtilities.getAdmin() != null;
+    }
 
-		return false;
-	}
+    @Override
+    public void adminLogout() {
+        SessionUtilities.setAdmin(null);
+    }
 
-	@Override
-	public boolean adminLogin(LoginDTO user) {
-		User userCheck = this.findUserByUsername(user.getUsername());
+    @Override
+    public boolean resetPass(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) return false;
 
-		if(userCheck==null) {
-			return false;
-		}
+        // Đặt lại mật khẩu mặc định
+        user.setPassword(passwordEncoder.encode("123@123a"));
 
-		log.info("userCheck:{}",userCheck.getUsername());
-
-		if(BCrypt.checkpw(user.getPassword(), userCheck.getPassword()) && userCheck.getRole()==0) {
-
-			SessionUtilities.setAdmin(ConvertUserToDto.convertUsertoDto(userCheck));
-
-			log.info("userCheck:{}",SessionUtilities.getAdmin().getUsername());
-
-			return true;
-		}
-
-
-		return false;
-	}
-
-	@Override
-	public boolean checkAdminLogin() {
-		return SessionUtilities.getAdmin()!=null;
-	}
-
-	@Override
-	public void adminLogout() {
-		SessionUtilities.setAdmin(null);
-	}
-
-	@Override
-	public boolean resetPass(Long id) {
-		User user = this.userRepository.findById(id).get();
-
-		user.setPassword(BCrypt.hashpw("123@123a", BCrypt.gensalt(10)));
-
-		if(this.userRepository.save(user)!=null) {
-			return true;
-		}
-
-		return false;
-	}
-
-
+        return saveUser(user);
+    }
 }
