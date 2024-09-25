@@ -136,6 +136,42 @@ public class HomeController {
 		return mdv;
 	}
 
+	@GetMapping("/tour/mien-nam")
+	ModelAndView tourMienNam(@RequestParam(value = "page", required = false, defaultValue = "1") Integer pageIndex,
+							   @RequestParam(value = "ten_tour", required = false) String ten_tour,
+							   @RequestParam(value = "gia_tour", required = false) Long gia_tour,
+							   @RequestParam(value = "ngay_khoi_hanh", required = false) String ngay_khoi_hanh) {
+
+		Long gia_tour_from = null;
+		Long gia_tour_to = null;
+		if (gia_tour != null) {
+			gia_tour_from = gia_tour == 0 ? null : (gia_tour == 1 ? 0 : (gia_tour == 2 ? 10000000l : 50000000l));
+
+			gia_tour_to = gia_tour == 0 ? null : (gia_tour == 1 ? 10000000l : (gia_tour == 2 ? 50000000l : 500000000l));
+		}
+
+		DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+
+		Date ngay_khoi_hanh_value = null;
+		try {
+			ngay_khoi_hanh_value = ngay_khoi_hanh != null ? format.parse(ngay_khoi_hanh) : null;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		ModelAndView mdv = new ModelAndView("user/tour3");
+
+		Page<TourDTO> tourPage = this.tourService.findAllTour(ten_tour, gia_tour_from, gia_tour_to, ngay_khoi_hanh_value, 3,
+				PageRequest.of(pageIndex-1, 12));
+
+		List<TourDTO> tours = tourPage.getContent();
+
+		mdv.addObject("tours", tours);
+		return mdv;
+	}
+
+ 
+	
 	@GetMapping("/tour/{id}")
 	ModelAndView tourDetail(@PathVariable(name = "id", required = true) Long id) {
 		ModelAndView mdv = new ModelAndView("user/tour-detail");
@@ -437,5 +473,12 @@ public class HomeController {
 	public String news() {
 		return "/user/tin-tuc";
 	}
-
+	@GetMapping("/contact")
+	public String contact() {
+		return "/user/contact";
+	}
+//	@GetMapping("/tour3")
+//	public String tour3() {
+//		return "/user/tour3";
+//	}
 }

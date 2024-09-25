@@ -33,42 +33,7 @@
 </head>
 
 <body>
-	<div th:replace="fragments/header :: header"></div>
-	<!-- <nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Pacific<span>Công
-					Ty Du Lịch</span></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
-
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="/" class="nav-link">Trang
-							Chủ</a></li>
-					<li class="nav-item"><a href="/tour/trong-nuoc"
-						class="nav-link">Tour trong nước</a></li>
-					<li class="nav-item"><a href="/tour/ngoai-nuoc"
-						class="nav-link">Tour nước ngoài</a></li>
-					<li class="nav-item"><a href="destination.html" class="nav-link">Điểm Đến</a></li>
-					<li class="nav-item"><a href="hotel.html" class="nav-link">Khách Sạn</a></li>
-					<li class="nav-item"><a href="/tin-tuc" class="nav-link">Tin
-							tức</a></li>
-					<li class="nav-item"><a href="/about" class="nav-link">Giới
-							Thiệu</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Liên Hệ</a></li>
-					<li class="nav-item"><a href="/account" class="nav-link">Tài
-							khoản</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav> -->
-
-	<!-- END nav -->
+	<div th:replace="user/header :: header"></div>
 
 	<div class="hero-wrap js-fullheight"
 		style="background-image: url('public/images/bg_5.jpg');">
@@ -896,100 +861,14 @@
 		</div>
 	</section>
 
-	<div th:replace="fragments/footer :: footer"></div>
-
-	<!-- <footer class="ftco-footer bg-bottom ftco-no-pt"
-		style="background-image: url(public/images/bg_3.jpg);">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-md pt-5">
-					<div class="ftco-footer-widget pt-md-5 mb-4">
-						<h2 class="ftco-heading-2">Về Chúng Tôi</h2>
-						<p>Xa xa, vượt qua những dãy núi trùng điệp, bạn sẽ khám phá
-							những miền đất hoang sơ và những vùng quê đầy bí ẩn, nơi thiên
-							nhiên và văn hóa hòa quyện tạo nên những trải nghiệm độc đáo.</p>
-						<ul
-							class="ftco-footer-social list-unstyled float-md-left float-lft">
-							<li class="ftco-animate"><a href="#"><span
-									class="fa fa-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="fa fa-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="fa fa-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md pt-5 border-left">
-					<div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-						<h2 class="ftco-heading-2">Thông Tin</h2>
-						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">Yêu Cầu Trực Tuyến</a></li>
-							<li><a href="#" class="py-2 d-block">Câu Hỏi Chung</a></li>
-							<li><a href="#" class="py-2 d-block">Điều Kiện Đặt Hàng</a></li>
-							<li><a href="#" class="py-2 d-block">Chính Sách Bảo Mật</a></li>
-							<li><a href="#" class="py-2 d-block">Chính Sách Hoàn
-									Tiền</a></li>
-							<li><a href="#" class="py-2 d-block">Gọi Chúng Tôi</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md pt-5 border-left">
-					<div class="ftco-footer-widget pt-md-5 mb-4">
-						<h2 class="ftco-heading-2">Kinh Nghiệm</h2>
-						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">Phiêu Lưu</a></li>
-							<li><a href="#" class="py-2 d-block">Khách Sạn và Nhà
-									Hàng</a></li>
-							<li><a href="#" class="py-2 d-block">Bãi Biển</a></li>
-							<li><a href="#" class="py-2 d-block">Thiên Nhiên</a></li>
-							<li><a href="#" class="py-2 d-block">Cắm Trại</a></li>
-							<li><a href="#" class="py-2 d-block">Tiệc Tùng</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md pt-5 border-left">
-					<div class="ftco-footer-widget pt-md-5 mb-4">
-						<h2 class="ftco-heading-2">Có Câu Hỏi?</h2>
-						<div class="block-23 mb-3">
-							<ul>
-								<li><span class="icon fa fa-map-marker"></span><span
-									class="text">QTSC 9 Building, Đ. Tô Ký, Tân Chánh Hiệp,
-										Quận 12, Hồ Chí Minh</span></li>
-								<li><a href="#"><span class="icon fa fa-phone"></span><span
-										class="text">+84 1900 1987</span></a></li>
-								<li><a href="#"><span class="icon fa fa-paper-plane"></span><span
-										class="text">cdfptpolytechnic@fpt.vn.com</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<p>
-						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-						Bản quyền &copy;
-						<script>
-							document.write(new Date().getFullYear());
-						</script>
-						Bảo lưu mọi quyền | Mẫu này được tạo bởi <a
-							href="https://colorlib.com" target="_blank">Nhóm LCR</a>
-						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer> -->
-
-
-
+	<div th:replace="user/footer :: footer"></div>
 
 	<!-- loader -->
-	<!-- 	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+	 	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
 				stroke="#F96D00" />
-		</svg></div> -->
+		</svg></div> 
 
 
 	<script src="/public/js/jquery.min.js"></script>
