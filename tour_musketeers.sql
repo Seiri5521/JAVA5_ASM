@@ -10,9 +10,8 @@ go
 use tour_musketeers
 go
 
-
--- Tạo bảng [user]
-CREATE TABLE [user] (
+-- Tạo bảng users
+CREATE TABLE users (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     username NVARCHAR(255) NOT NULL,
     ho_ten NVARCHAR(255) NOT NULL,
@@ -76,7 +75,7 @@ CREATE TABLE booking (
     booking_at DATETIME NOT NULL DEFAULT GETDATE(),
     pt_thanh_toan INT,
     ghi_chu NVARCHAR(MAX),
-    CONSTRAINT FK_Booking_User FOREIGN KEY (user_id) REFERENCES [user](id),
+    CONSTRAINT FK_Booking_User FOREIGN KEY (user_id) REFERENCES users(id),
     CONSTRAINT FK_Booking_Tour FOREIGN KEY (tour_id) REFERENCES Tour(id)
 );
 
@@ -91,7 +90,7 @@ CREATE TABLE tin_tuc (
 );
 
 -- Chèn dữ liệu mẫu vào bảng [user]
-INSERT INTO [user] (username, ho_ten, password, gioi_tinh, sdt, email, dia_chi, role)
+INSERT INTO users (username, ho_ten, password, gioi_tinh, sdt, email, dia_chi, role)
 VALUES 
 ('john_doe', 'John Doe', 'hashed_password1', N'Nam', '0909123456', 'john.doe@example.com', N'123 Đường ABC, Quận 1, TP.HCM', 1),
 ('jane_smith', 'Jane Smith', 'hashed_password2', N'Nữ', '0909234567', 'jane.smith@example.com', N'456 Đường DEF, Quận 3, TP.HCM', 2),
@@ -150,8 +149,8 @@ VALUES
 (N'Tour Hạ Long Mới', N'Tham quan các điểm mới tại Vịnh Hạ Long.', N'Tour Hạ Long mới của chúng tôi bao gồm việc tham quan các điểm mới như...', 'https://example.com/images/tour_halong_moi.jpg', '2024-12-01 09:00:00'),
 (N'Khám Phá Bali', N'Trải nghiệm kỳ nghỉ tuyệt vời tại Bali.', N'Bali không chỉ nổi tiếng với bãi biển mà còn với văn hóa độc đáo...', 'https://example.com/images/kham_pha_bali.jpg', '2024-12-05 14:45:00');
 
--- Kiểm tra dữ liệu trong bảng [user]
-SELECT * FROM [user];
+-- Kiểm tra dữ liệu trong bảng users
+SELECT * FROM users;
 
 -- Kiểm tra dữ liệu trong bảng Destination
 SELECT * FROM destination;
@@ -169,3 +168,14 @@ SELECT * FROM tour_start;
 SELECT * FROM booking;
 -- Kiểm tra bảng tin_tuc
 SELECT * FROM tin_tuc;
+
+select u1_0.id,
+		u1_0.dia_chi,
+		u1_0.email,
+		u1_0.gioi_tinh,
+		u1_0.ho_ten,
+		u1_0.password,
+		u1_0.role,
+		u1_0.sdt,
+		u1_0.username 
+from users u1_0 where u1_0.username='john_doe'
