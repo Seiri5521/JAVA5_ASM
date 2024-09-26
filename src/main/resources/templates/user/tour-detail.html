@@ -2,158 +2,170 @@
 <html lang="en">
 
 <head>
-<title>Chi tiết tour</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Chi tiết tour</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap"
-	rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/animate.css">
+    <link rel="stylesheet" href="../public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../public/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../public/css/magnific-popup.css">
+    <link rel="stylesheet" href="../public/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../public/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="../public/css/flaticon.css">
+    <link href="../public/css/style.css" rel="stylesheet">
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #setImage img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-<link rel="stylesheet" href="../public/css/animate.css">
+        .page-header {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../public/images/bg_15.jpg') no-repeat center center/cover;
+        }
 
-<link rel="stylesheet" href="../public/css/owl.carousel.min.css">
-<link rel="stylesheet" href="../public/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="../public/css/magnific-popup.css">
+        .carousel-inner img {
+            border-radius: 8px;
+        }
 
-<link rel="stylesheet" href="../public/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="../public/css/jquery.timepicker.css">
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s;
+        }
 
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
 
-<link rel="stylesheet" href="../public/css/flaticon.css">
-<link href="../public/css/style.css" rel="stylesheet">
-	<style>
-		#setImage img {
-			width: 100%;
-		}
-	</style>
+        .custom-select {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        .form-control {
+            border-radius: 4px;
+        }
+    </style>
 </head>
 
 <body>
-	<div th:replace="user/header :: header"></div>
+    <div th:replace="user/header :: header"></div>
 
-	<!-- Header Start -->
-	<div class="container-fluid page-header">
-		<div class="container">
-			<div
-				class="d-flex flex-column align-items-center justify-content-center"
-				style="min-height: 400px">
-				<h3 class="display-4 text-white text-uppercase">Thông tin chi
-					tiết tour</h3>
-				<div class="d-inline-flex text-white">
-					<p class="m-0 text-uppercase">
-						<a class="text-white" href="">Trang chủ</a>
-					</p>
-					<i class="fa fa-angle-double-right pt-1 px-3"></i>
-					<p class="m-0 text-uppercase">Chi tiết tour</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Header End -->
+    <!-- Header Start -->
+    <div class="container-fluid page-header">
+        <div class="container">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+                <h3 class="display-4 text-white text-uppercase">Thông tin chi tiết tour</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase">
+                        <a class="text-white" href="">Trang chủ</a>
+                    </p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Chi tiết tour</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
 
-	<!-- Blog Start -->
-	<div class="container-fluid py-5">
-		<div class="container py-5">
-			<div class="row">
-				<div class="col-lg-8">
-					<!-- Blog Detail Start -->
-					<div class="pb-3">
-						<div class="blog-item">
-							<div id="header-carousel" class="carousel slide" data-ride="carousel">
-								<div class="carousel-inner">
-									<div th:each="image, iterStat : ${imageList}" class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">
-										<img class="w-100" style="height: 420px" th:src="'../public/images/' + ${image.url}" alt="Image">
-									</div>
-								</div>
-								<a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-									<div class="btn btn-dark" style="width: 45px; height: 45px;">
-										<span class="carousel-control-prev-icon mb-n2"></span>
-									</div>
-								</a>
-								<a class="carousel-control-next" href="#header-carousel" data-slide="next">
-									<div class="btn btn-dark" style="width: 45px; height: 45px;">
-										<span class="carousel-control-next-icon mb-n2"></span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="bg-white mb-3" style="padding: 30px;">
-							<div class="d-flex mb-3">
-								<a class="text-primary text-uppercase text-decoration-none"
-									href="">Tour</a> <span class="text-primary px-2">|</span> <a
-									class="text-primary text-uppercase text-decoration-none"
-									href="">Tours Detail</a>
-							</div>
-							<div class="container" id="setImage" th:utext="${tour.noi_dung_tour}"></div>
-						</div>
-					</div>
-					<!-- Blog Detail End -->
-				</div>
+    <!-- Blog Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Blog Detail Start -->
+                    <div class="pb-3">
+                        <div class="blog-item">
+                            <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div th:each="image, iterStat : ${imageList}" class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">
+                                        <img class="w-100" style="height: 420px" th:src="'../public/images/' + ${image.url}" alt="Image">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                                        <span class="carousel-control-prev-icon mb-n2"></span>
+                                    </div>
+                                </a>
+                                <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                                        <span class="carousel-control-next-icon mb-n2"></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-white mb-3 p-4 rounded shadow-sm">
+                            <div class="d-flex mb-3">
+                                <a class="text-primary text-uppercase text-decoration-none" href="">Tour</a>
+                                <span class="text-primary px-2">|</span>
+                                <a class="text-primary text-uppercase text-decoration-none" href="">Chi tiết tour</a>
+                            </div>
+                            <div class="container" id="setImage" th:utext="${tour.noi_dung_tour}"></div>
+                        </div>
+                    </div>
+                    <!-- Blog Detail End -->
+                </div>
 
-				<div class="col-lg-4 mt-5 mt-lg-0">
-					<!-- Author Bio -->
-					<form  th:action="@{/tour/booking/{id}(id=${tour.id})}" method="GET" class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
-						<img th:src="'../public/images/' + ${tour.anh_tour}" class="img-fluid mx-auto mb-3"
-							style="width: 100px;">
-						<h3 class="text-primary mb-3" th:text="${tour.ten_tour}"></h3>
-						<p th:text="${tour.gioi_thieu_tour}">Conset elitr erat vero
-							dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est ipsum
-							erat kasd amet elitr</p>
-						<h4 class="text-danger mb-3">Lịch khởi hành và giá</h4>
-						<select class="custom-select px-4" name="ngay_khoi_hanh" style="height: 47px;">
-							<option th:each="date : ${listDate}" th:value="${date.getNgay_khoi_hanh()}"
-								th:text="${#dates.format(date.ngay_khoi_hanh, 'dd-MM-yyyy')}">Chọn
-								ngày khởi hành</option>
-						</select>
-						<input type="hidden" name="tong_tien" id="input_tong_tien" value="">
-						<h5 class="text-danger mt-4" th:attr="data-price=${tour.gia_tour}" id="gia_tour" th:inline="text">Giá : [[${#numbers.formatInteger(tour.gia_tour,3,'POINT')}]] VNĐ / người</h5>
-						<input type="number" value="1" class="form-control p-4" id="so_nguoi" name="so_nguoi"
-							placeholder="Nhập số người" />
-						<h5 class="text-danger mt-4 mb-2" id="tong_tien">Tông tiền : 15.000.000 đ</h5>
-						<button type="submit" class="btn btn-primary py-md-3 px-md-5 mt-2">Đặt tour ngay</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Blog End -->
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <!-- Author Bio -->
+                    <form th:action="@{/tour/booking/{id}(id=${tour.id})}" method="GET" class="d-flex flex-column text-center bg-white mb-5 py-5 px-4 rounded shadow-sm">
+                        <img th:src="'../public/images/' + ${tour.anh_tour}" class="img-fluid mx-auto mb-3" style="width: 100px;">
+                        <h3 class="text-primary mb-3" th:text="${tour.ten_tour}"></h3>
+                        <p th:text="${tour.gioi_thieu_tour}">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est ipsum erat kasd amet elitr</p>
+                        <h4 class="text-danger mb-3">Lịch khởi hành và giá</h4>
+                        <select class="custom-select px-4 mb-3" name="ngay_khoi_hanh" style="height: 47px;">
+                            <option th:each="date : ${listDate}" th:value="${date.getNgay_khoi_hanh()}" th:text="${#dates.format(date.ngay_khoi_hanh, 'dd-MM-yyyy')}">Chọn ngày khởi hành</option>
+                        </select>
+                        <input type="hidden" name="tong_tien" id="input_tong_tien" value="">
+                        <h5 class="text-danger mt-4" th:attr="data-price=${tour.gia_tour}" id="gia_tour" th:inline="text">Giá : [[${#numbers.formatInteger(tour.gia_tour, 3, 'POINT')}]] VNĐ / người</h5>
+                        <input type="number" value="1" class="form-control p-4" id="so_nguoi" name="so_nguoi" placeholder="Nhập số người" oninput="calculateTotal()" />
+                        <h5 class="text-danger mt-4 mb-2" id="tong_tien">Tổng tiền : <span id="total_price">[[${#numbers.formatInteger(tour.gia_tour, 3, 'POINT')}]]</span> VNĐ</h5>
+                        <button type="submit" class="btn btn-primary py-md-3 px-md-5 mt-2">Đặt tour ngay</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
 
+    <div th:replace="user/footer :: footer"></div>
 
-	<div th:replace="user/footer :: footer"></div>
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        </svg></div>
 
-	<!-- loader -->
-	 	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-				stroke="#F96D00" />
-		</svg></div> 
+    <script src="../public/js/jquery.min.js"></script>
+    <script src="../public/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="../public/js/popper.min.js"></script>
+    <script src="../public/js/bootstrap.min.js"></script>
+    <script src="../public/js/jquery.easing.1.3.js"></script>
+    <script src="../public/js/jquery.waypoints.min.js"></script>
+    <script src="../public/js/jquery.stellar.min.js"></script>
+    <script src="../public/js/owl.carousel.min.js"></script>
+    <script src="../public/js/jquery.magnific-popup.min.js"></script>
+    <script src="../public/js/jquery.animateNumber.min.js"></script>
+    <script src="../public/js/bootstrap-datepicker.js"></script>
+    <script src="../public/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaG8mFhUN6Jbn19Wi5oDmyM"></script>
+    <script src="../public/js/main.js"></script>
 
+    <script>
+        function calculateTotal() {
+            var pricePerPerson = parseInt(document.getElementById("gia_tour").getAttribute("data-price"));
+            var numberOfPeople = document.getElementById("so_nguoi").value || 0;
+            var totalPrice = pricePerPerson * numberOfPeople;
 
-	<script src="../public/js/jquery.min.js"></script>
-	<script src="../public/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../public/js/popper.min.js"></script>
-	<script src="../public/js/bootstrap.min.js"></script>
-	<script src="../public/js/jquery.easing.1.3.js"></script>
-	<script src="../public/js/jquery.waypoints.min.js"></script>
-	<script src="../public/js/jquery.stellar.min.js"></script>
-	<script src="../public/js/owl.carousel.min.js"></script>
-	<script src="../public/js/jquery.magnific-popup.min.js"></script>
-	<script src="../public/js/jquery.animateNumber.min.js"></script>
-	<script src="../public/js/bootstrap-datepicker.js"></script>
-	<script src="../public/js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="../public/js/google-map.js"></script>
-	<script src="../public/js/main.js"></script>
-
+            document.getElementById("total_price").innerText = totalPrice.toLocaleString() + " VNĐ";
+            document.getElementById("input_tong_tien").value = totalPrice;
+        }
+    </script>
 </body>
 
 </html>
