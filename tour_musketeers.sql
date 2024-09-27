@@ -107,7 +107,7 @@ VALUES
 -- Chèn dữ liệu mẫu vào bảng Tour
 INSERT INTO tour (ten_tour, gioi_thieu_tour, so_ngay, noi_dung_tour, ngay_khoi_hanh, ngay_ket_thuc, diem_den, loai_tour, anh_tour, diem_khoi_hanh, trang_thai, gia_tour)
 VALUES 
-(N'Tour Hạ Long 3 Ngày 2 Đêm', 'Tham quan vịnh Hạ Long tuyệt đẹp', 3, N'Chi tiết về tour Hạ Long...', '2024-12-01', '2024-12-03', N'Hạ Long Bay', 1, 'https://example.com/images/halong.jpg', N'TP.HCM', 1, 5000000),
+(N'Tour Hạ Long 3 Ngày 2 Đêm', 'Tham quan vịnh Hạ Long tuyệt đẹp', 3, N'Chi tiết về tour Hạ Long...', '2024-12-01', '2024-12-03', N'Hạ Long Bay', 1, 'destination-1.jpg', N'TP.HCM', 1, 5000000),
 (N'Tour Bali Thư Giãn 5 Ngày 4 Đêm', 'Trải nghiệm kỳ nghỉ tại Bali', 5, N'Chi tiết về tour Bali...', '2024-12-10', '2024-12-14', N'Bali', 2, 'https://example.com/images/bali.jpg', N'Hà Nội', 1, 15000000),
 (N'Tour Tokyo Kỳ Thú 7 Ngày 6 Đêm', 'Khám phá văn hóa và công nghệ của Tokyo', 7, N'Chi tiết về tour Tokyo...', '2024-12-15', '2024-12-21', N'Tokyo', 3, 'https://example.com/images/tokyo.jpg', N'Đà Nẵng', 1, 25000000),
 (N'Tour Paris Lãng Mạn 4 Ngày 3 Đêm', 'Trải nghiệm vẻ đẹp của Paris', 4, N'Chi tiết về tour Paris...', '2024-12-20', '2024-12-23', N'Paris', 4, 'https://example.com/images/paris.jpg', N'TP.HCM', 1, 20000000);
@@ -115,7 +115,7 @@ VALUES
 -- Chèn dữ liệu mẫu vào bảng Image
 INSERT INTO image (url, tour_id)
 VALUES 
-('https://example.com/images/halong1.jpg', 1),
+('destination-1.jpg', 1),
 ('https://example.com/images/halong2.jpg', 1),
 ('https://example.com/images/bali1.jpg', 2),
 ('https://example.com/images/bali2.jpg', 2),

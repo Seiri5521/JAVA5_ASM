@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-<title>Tài khoản</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Tài khoản</title>
 
+<!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
 	rel="stylesheet">
@@ -14,140 +15,138 @@
 	href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap"
 	rel="stylesheet">
 
+<!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- Stylesheets -->
 <link rel="stylesheet" href="public/css/animate.css">
-
 <link rel="stylesheet" href="public/css/owl.carousel.min.css">
 <link rel="stylesheet" href="public/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="public/css/magnific-popup.css">
-
 <link rel="stylesheet" href="public/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="public/css/jquery.timepicker.css">
-
-
 <link rel="stylesheet" href="public/css/flaticon.css">
-<link href="public/css/style.css" rel="stylesheet">
-
+<link rel="stylesheet" href="public/css/style.css">
+<link rel="stylesheet" href="public/css/custom-style.css">
+<!-- Thêm stylesheet tùy chỉnh -->
 </head>
 
 <body>
+	<!-- Header -->
 	<div th:replace="user/header :: header"></div>
 
+	<!-- Hero Section -->
 	<div class="hero-wrap js-fullheight"
-		style="background-image: url('public/images/bg_8.jpg');">
+		style="background-image: url('public/images/bg_12.jpg');">
 		<div class="overlay"></div>
 		<div class="container">
 			<div
 				class="row no-gutters slider-text js-fullheight align-items-center"
 				data-scrollax-parent="true">
-				<!-- Contact Start -->
-				<div class="container-fluid py-5">
-					<div class="container py-5">
-						<div class="text-center mb-3 pb-3">
-							<h3 class="text-primary text-uppercase"
-								style="letter-spacing: 5px;">Tài khoản</h3>
-							<h1>Thông tin tài khoản</h1>
-						</div>
-						<div class="row justify-content-center">
-							<div class="col-lg-8">
-								<div class="contact-form bg-white" style="padding: 30px;">
-									<div id="help-block text-succces" style="color: green;"
-										th:if="${message != null}">[[${message}]]</div>
-									<div class="align-content-end py-4">
-										<a class="btn btn-primary py-3 px-4" href="/user/tour" id="">Quản
-											lý tour đã đặt</a>
-									</div>
-									<form name="sentMessage" method="post" action="/updateAccount"
-										id="contactForm" novalidate="novalidate">
-										<div class="form-row">
-											<div class="control-group col-sm-6">
-												<input type="text" class="form-control p-4" id="username"
-													disabled="disabled" name="username"
-													th:value="${user.username}" placeholder="Tên người dùng"
-													required="required"
-													data-validation-required-message="Vui lòng nhập tên người dùng" />
-												<p class="help-block text-danger"></p>
-											</div>
-											<div class="control-group col-sm-6">
-												<input type="text" class="form-control p-4" name="ho_ten"
-													id="email" placeholder="Họ tên" required="required"
-													th:value="${user.ho_ten}"
-													data-validation-required-message="Vui lòng nhập họ và tên"
-													disabled="disabled" />
-												<p class="help-block text-danger"></p>
-											</div>
-										</div>
-										<div class="control-group">
-											<input type="email" class="form-control p-4" name="email"
-												id="subjectd" placeholder="Email" required="required"
-												disabled="disabled" th:value="${user.email}"
-												data-validation-required-message="Vui lòng nhập email" />
-											<p class="help-block text-danger"></p>
-										</div>
-										<div class="form-row">
-											<div class="control-group col-sm-6">
-												<input type="tel" class="form-control p-4" id="name"
-													name="sdt" placeholder="Số điện thoại" required="required"
-													disabled="disabled" th:value="${user.sdt}"
-													data-validation-required-message="Vui lòng nhập số điện thoại" />
-												<p class="help-block text-danger"></p>
-											</div>
-											<div class="control-group col-sm-6">
-												<div class="mb-3 mb-md-0">
-													<select class="custom-select px-4" id="select-gender"
-														disabled="disabled" name="gioi_tinh"
-														th:value="${user.gioi_tinh}" style="height: 47px;">
-														<option value="Nam">Nam</option>
-														<option value="Nữ">Nữ</option>
-													</select>
-												</div>
-											</div>
-										</div>
-										<div class="control-group">
-											<input type="text" class="form-control p-4" name="dia_chi"
-												id="subject" placeholder="Địa chỉ" required="required"
-												disabled="disabled" th:value="${user.dia_chi}"
-												data-validation-required-message="Vui lòng nhập địa chỉ" />
-											<p class="help-block text-danger"></p>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-primary py-3 px-4"
-												id="sendMessageButton">Cập nhật thông tin tài khoản</button>
-										</div>
-										<div class="control-group d-flex justify-content-between">
-											<a href="/changepassword" class="pt-4 d-block">Đổi mật
-												khẩu</a> <a href="/logout"
-												onclick="return confirm('Bạn có chắc chắn đăng xuất');"
-												class="text-danger pt-4 d-block">Đăng xuất</a>
-										</div>
-									</form>
-
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="text-center mb-3 pb-3">
+					<h1 class="text-white" >Thông tin tài khoản</h1>
 				</div>
-				<!-- Contact End -->
 			</div>
 		</div>
 	</div>
 
+	<!-- Account Info Section -->
+	<div class="container-fluid py-5">
+		<div class="container py-5">
 
+			<!-- Account Form -->
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="contact-form bg-white shadow-lg rounded p-4">
+						<div id="help-block" class="text-success"
+							th:if="${message != null}">[[${message}]]</div>
+						<div class="align-content-end py-4">
+							<a class="btn btn-primary py-3 px-4" href="/user/tour">Quản
+								lý tour đã đặt</a>
+						</div>
+
+						<form name="sentMessage" method="post" action="/updateAccount"
+							id="contactForm" novalidate="novalidate">
+							<div class="form-row">
+								<div class="form-group col-sm-6">
+									<label for="username">Tên người dùng</label> <input type="text"
+										class="form-control p-4" id="username" name="username"
+										disabled="disabled" th:value="${user.username}"
+										required="required" />
+								</div>
+								<div class="form-group col-sm-6">
+									<label for="ho_ten">Họ tên</label> <input type="text"
+										class="form-control p-4" name="ho_ten" id="ho_ten"
+										placeholder="Họ tên" required="required"
+										th:value="${user.ho_ten}" disabled="disabled" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="email">Email</label> <input type="email"
+									class="form-control p-4" name="email" id="email"
+									placeholder="Email" required="required"
+									th:value="${user.email}" disabled="disabled" />
+							</div>
+
+							<div class="form-row">
+								<div class="form-group col-sm-6">
+									<label for="sdt">Số điện thoại</label> <input type="tel"
+										class="form-control p-4" id="sdt" name="sdt"
+										placeholder="Số điện thoại" required="required"
+										th:value="${user.sdt}" disabled="disabled" />
+								</div>
+								<div class="form-group col-sm-6">
+									<label for="select-gender">Giới tính</label> <select
+										class="custom-select px-4" id="select-gender"
+										disabled="disabled" name="gioi_tinh"
+										th:value="${user.gioi_tinh}" style="height: 47px;">
+										<option value="Nam">Nam</option>
+										<option value="Nữ">Nữ</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="dia_chi">Địa chỉ</label> <input type="text"
+									class="form-control p-4" name="dia_chi" id="dia_chi"
+									placeholder="Địa chỉ" required="required"
+									th:value="${user.dia_chi}" disabled="disabled" />
+							</div>
+
+							<div class="text-center">
+								<button class="btn btn-primary py-3 px-4" id="sendMessageButton"
+									disabled>Cập nhật thông tin tài khoản</button>
+							</div>
+
+							<div class="form-group d-flex justify-content-between mt-4">
+								<a href="/changepassword" class="pt-4">Đổi mật khẩu</a> <a
+									href="/logout"
+									onclick="return confirm('Bạn có chắc chắn đăng xuất');"
+									class="text-danger pt-4">Đăng xuất</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of Account Info Section -->
+	<!-- Footer -->
 	<div th:replace="user/footer :: footer"></div>
 
-	<!-- loader -->
+	<!-- Loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
-		</svg>
+            <circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#F96D00" />
+        </svg>
 	</div>
 
-
+	<!-- Scripts -->
 	<script src="/public/js/jquery.min.js"></script>
 	<script src="/public/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/public/js/popper.min.js"></script>
@@ -161,24 +160,10 @@
 	<script src="/public/js/bootstrap-datepicker.js"></script>
 	<script src="/public/js/scrollax.min.js"></script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+		src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&sensor=false"></script>
 	<script src="/public/js/google-map.js"></script>
 	<script src="/public/js/main.js"></script>
-	<script type="text/javascript">
-		document.getElementById("sendMessageButton").onclick = function(e) {
-			e.preventDefault();
-			if (document.getElementById("username").disabled) {
-				document.getElementById("select-gender").removeAttribute(
-						"disabled");
-				var inputs = document.querySelectorAll("input");
-				for (var i = 0; i < inputs.length; i++) {
-					inputs[i].removeAttribute("disabled");
-				}
-			} else {
-				document.getElementById("contactForm").submit();
-			}
-		};
-	</script>
+
 </body>
 
 </html>
