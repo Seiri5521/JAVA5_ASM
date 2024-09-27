@@ -13,96 +13,117 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap"
 	rel="stylesheet">
-
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <link rel="stylesheet" href="public/css/animate.css">
-
 <link rel="stylesheet" href="public/css/owl.carousel.min.css">
 <link rel="stylesheet" href="public/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="public/css/magnific-popup.css">
-
 <link rel="stylesheet" href="public/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="public/css/jquery.timepicker.css">
-
-
 <link rel="stylesheet" href="public/css/flaticon.css">
 <link href="public/css/style.css" rel="stylesheet">
 
+<style>
+/* Background image and blur effect */
+body {
+	background: url('public/images/login.jpg') no-repeat center center fixed;
+	background-size: cover;
+	font-family: 'Poppins', sans-serif;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5); /* Add a transparent overlay */
+	z-index: -1;
+	filter: blur(10px); /* Apply blur to the background */
+}
+
+/* Container styling */
+.container-fluid {
+	position: relative;
+	z-index: 1;
+}
+
+.contact-form {
+	background: rgba(255, 255, 255, 0.5);
+	/* Semi-transparent white background with more transparency */
+	border-radius: 15px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1, h6 {
+	color: #fff; /* Make the text white for better visibility */
+}
+
+.btn-primary {
+	background-color: #ff5f6d;
+	border: none;
+	transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+	background-color: #ff3b4f;
+}
+
+.form-control {
+	border-radius: 10px;
+	padding: 20px;
+}
+</style>
 </head>
 
 <body>
+	<div class="overlay"></div>
+
 	<div th:replace="user/header :: header"></div>
 
-
-	<div class="hero-wrap js-fullheight"
-		style="background-image: url('public/images/bg_9.jpg');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text js-fullheight align-items-center"
-				data-scrollax-parent="true">
-
-				<!-- Contact Start -->
-				<div class="container-fluid py-5">
-					<div class="container py-5">
-						<div class="text-center mb-3 pb-3">
-							<h3 class="text-primary text-uppercase"
-								style="letter-spacing: 5px;">Đăng nhập</h3>
-							<h1>Đăng nhập tài khoản của bạn</h1>
-						</div>
-						<div class="row justify-content-center">
-							<div class="col-lg-8">
-								<div class="contact-form bg-white" style="padding: 30px;">
-									<div id="help-block text-danger" style="color: red;"
-										th:if="${err != null}">[[${err}]]</div>
-									<div id="help-block text-succces" style="color: green;"
-										th:if="${message != null}">[[${message}]]</div>
-									<form name="sentMessage" action="/login" method="POST"
-										id="contactForm" novalidate="novalidate">
-										<div class="control-group">
-											<h5 class="control-group-heading py-2">Tên đăng nhập:</h5>
-											<input type="text" class="form-control p-4" id="subject"
-												placeholder="Tên đăng nhập" required name="username" />
-											<p class="help-block text-danger"></p>
-										</div>
-										<div class="control-group">
-											<h5 class="control-group-heading py-2">Mật khẩu:</h5>
-											<input type="password" name="password"
-												class="form-control p-4" id="subject" placeholder="Mật khẩu"
-												required />
-											<p class="help-block text-danger"></p>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-primary py-3 px-4" type="submit"
-												id="sendMessageButton">Đăng nhập</button>
-										</div>
-									</form>
-									<a href="/register" class="pt-4">Bạn chưa có tài khoản? Đăng ký</a>
-								</div>
+	<!-- Contact Start -->
+	<div class="container-fluid py-5">
+		<div class="container py-5">
+			<div class="text-center mb-3 pb-3">
+				<h3 class="text-primary text-uppercase" style="letter-spacing: 5px;">Đăng
+					nhập</h3>
+				<h1>Đăng nhập tài khoản của bạn</h1>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="contact-form" style="padding: 30px;">
+						<div id="help-block text-danger" style="color: red;"
+							th:if="${err != null}">[[${err}]]</div>
+						<div id="help-block text-success" style="color: green;"
+							th:if="${message != null}">[[${message}]]</div>
+						<form name="sentMessage" action="/login" method="POST"
+							id="contactForm" novalidate="novalidate">
+							<div class="control-group">
+								<h5 class="control-group-heading py-2">Tên đăng nhập:</h5>
+								<input type="text" class="form-control p-4"
+									placeholder="Tên đăng nhập" required name="username" />
+								<p class="help-block text-danger"></p>
 							</div>
-						</div>
+							<div class="control-group">
+								<h5 class="control-group-heading py-2">Mật khẩu:</h5>
+								<input type="password" name="password" class="form-control p-4"
+									placeholder="Mật khẩu" required />
+								<p class="help-block text-danger"></p>
+							</div>
+							<div class="text-center">
+								<button class="btn btn-primary py-3 px-4" type="submit">Đăng
+									nhập</button>
+							</div>
+						</form>
+						<a href="/register" class="pt-4">Chưa có tài khoản</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
-
 	<div th:replace="user/footer :: footer"></div>
-
-	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
-		</svg>
-	</div>
-
 
 	<script src="/public/js/jquery.min.js"></script>
 	<script src="/public/js/jquery-migrate-3.0.1.min.js"></script>
@@ -116,11 +137,8 @@
 	<script src="/public/js/jquery.animateNumber.min.js"></script>
 	<script src="/public/js/bootstrap-datepicker.js"></script>
 	<script src="/public/js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="/public/js/google-map.js"></script>
 	<script src="/public/js/main.js"></script>
-
 </body>
 
 </html>
