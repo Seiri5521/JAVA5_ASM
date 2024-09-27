@@ -356,7 +356,7 @@
 						<div class="item">
 							<div class="project-destination">
 								<a href="#" class="img"
-									style="background-image: url(public/images/place-1.jpg);">
+									style="background-image: url(public/images/blog_2.jpg);">
 									<div class="text">
 										<h3>Hà Nội</h3>
 										<span>8 Chuyến đi</span>
@@ -367,7 +367,7 @@
 						<div class="item">
 							<div class="project-destination">
 								<a href="#" class="img"
-									style="background-image: url(public/images/place-2.jpg);">
+									style="background-image: url(public/images/bg_9.jpg);">
 									<div class="text">
 										<h3>Huế</h3>
 										<span>2 Chuyến đi</span>
@@ -378,7 +378,7 @@
 						<div class="item">
 							<div class="project-destination">
 								<a href="#" class="img"
-									style="background-image: url(public/images/place-3.jpg);">
+									style="background-image: url(public/images/blog_1.jpg);">
 									<div class="text">
 										<h3>Thành phố Hồ Chí Minh</h3>
 										<span>5 Chuyến đi</span>
@@ -389,7 +389,7 @@
 						<div class="item">
 							<div class="project-destination">
 								<a href="#" class="img"
-									style="background-image: url(public/images/place-4.jpg);">
+									style="background-image: url(public/images/bg_10.jpg);">
 									<div class="text">
 										<h3>Cần Thơ</h3>
 										<span>5 Chuyến đi</span>
@@ -400,7 +400,7 @@
 						<div class="item">
 							<div class="project-destination">
 								<a href="#" class="img"
-									style="background-image: url(public/images/place-5.jpg);">
+									style="background-image: url(public/images/bg_2.jpg);">
 									<div class="text">
 										<h3>Cà Mau</h3>
 										<span>7 Chuyến đi</span>
@@ -427,7 +427,7 @@
 				<div th:each="tour : ${tours}" class="col-md-4 ftco-animate">
 					<div class="project-wrap">
 						<a href="#" class="img"
-							style="background-image: url(public/images/destination-1.jpg);" >
+							th:src="'/public/images/' + ${tour.anh_tour}" >
 							
 							<span class="price" th:inline="text">[[${#numbers.formatInteger(tour.gia_tour,3,'POINT')}]]
 								VNĐ</span>
@@ -594,7 +594,7 @@
 						<div class="col-md-6 d-flex align-items-stretch">
 							<div
 								class="img d-flex w-100 align-items-center justify-content-center"
-								style="background-image: url(public/images/about-1.jpg);">
+								style="background-image: url(public/images/about-2.jpg);">
 							</div>
 						</div>
 						<div class="col-md-6 pl-md-5 py-5">
@@ -649,10 +649,10 @@
 										độc đáo, vừa hoài niệm vừa sôi động.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
-											style="background-image: url(public/images/person_1.jpg)"></div>
+											style="background-image: url(public/images/team1.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Hoàng Chương</p>
-											<span class="position">Giám Đốc Marketing</span>
+											<p class="name">Khoai Lang Thang</p>
+											<span class="position">Blogger</span>
 										</div>
 									</div>
 								</div>
@@ -672,7 +672,7 @@
 										kim của triều đại xưa.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
-											style="background-image: url(public/images/person_2.jpg)"></div>
+											style="background-image: url(public/images/team6.jpg)"></div>
 										<div class="pl-3">
 											<p class="name">Thiên Lý</p>
 											<span class="position">SEO Tập Đoàn VinGroup</span>
@@ -695,10 +695,10 @@
 										cạnh bên các di tích văn hóa lâu đời.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
-											style="background-image: url(public/images/person_3.jpg)"></div>
+											style="background-image: url(public/images/team2.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Văn Đủ</p>
-											<span class="position">PGĐ TĐ nhựa Tân Thành</span>
+											<p class="name">Trịnh Hà Vy</p>
+											<span class="position">SChannel</span>
 										</div>
 									</div>
 								</div>
@@ -718,10 +718,10 @@
 										đặc biện xao xuyển bởi con người nơi đây.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
-											style="background-image: url(public/images/person_1.jpg)"></div>
+											style="background-image: url(public/images/team3.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Quang Nghĩa</p>
-											<span class="position">Chuyên viên đầu tư BĐS</span>
+											<p class="name">Dương Phạm</p>
+											<span class="position">Tikker</span>
 										</div>
 									</div>
 								</div>
@@ -741,10 +741,10 @@
 										thiên nhiên.</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img"
-											style="background-image: url(public/images/person_2.jpg)"></div>
+											style="background-image: url(public/images/team4.jpg)"></div>
 										<div class="pl-3">
-											<p class="name">Việt Cường</p>
-											<span class="position">Cổ Đông chuỗi siêu thị BHX</span>
+											<p class="name">Nguyễn Chiều Hoang</p>
+											<span class="position">Chủ tour du lịch</span>
 										</div>
 									</div>
 								</div>
@@ -770,7 +770,7 @@
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry justify-content-end">
 						<a href="blog-single.html" class="block-20"
-							style="background-image: url('public/images/image_1.jpg');">
+							style="background-image: url('public/images/bg_8.jpg');">
 						</a>
 						<div class="text">
 							<div class="d-flex align-items-center mb-4 topp">
@@ -794,7 +794,7 @@
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry justify-content-end">
 						<a href="blog-single.html" class="block-20"
-							style="background-image: url('public/images/image_2.jpg');">
+							style="background-image: url('public/images/bg_11.jpg');">
 						</a>
 						<div class="text">
 							<div class="d-flex align-items-center mb-4 topp">
@@ -818,7 +818,7 @@
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry">
 						<a href="blog-single.html" class="block-20"
-							style="background-image: url('public/images/image_3.jpg');">
+							style="background-image: url('public/images/bg_10.jpg');">
 						</a>
 						<div class="text">
 							<div class="d-flex align-items-center mb-4 topp">
