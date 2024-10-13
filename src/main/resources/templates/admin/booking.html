@@ -51,8 +51,10 @@
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         Bảng dữ liệu booking
+                                <a href="/export/excel" class="btn btn-success btn-sm float-end">Xuất Excel</a>
+        <a href="/export/word" class="btn btn-primary btn-sm float-end me-2">Xuất Word</a>
                     </div>
-                    <div class="card-body">
+                    <div  class="card-body">
                         <table id="datatablesSimple">
                             <thead>
                                 <tr>
@@ -111,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+
 
 
 
@@ -225,7 +228,6 @@
 <script src="/public/admin/js/all.min.js"></script>
 <script src="/public/admin/js/ckeditor.js"></script>
 <script>
-
     function hideModal() {
         $("#editModal").modal('hide');
     }
@@ -303,7 +305,6 @@
         $('#id').val(id);
     }
 
-
     function viewDetailBooking(id) {
         $.ajax({
             url: '/api/booking/detail/' + id,
@@ -378,18 +379,11 @@
                 }
             ]
         } );
-
-
-
-
         function deleteUser(id) {
             // Hiển thị modal xác nhận xóa user
             $('#deleteModal input[name="id"]').val(id);
             $('#deleteModal').modal('show');
         }
-
-
-
     } );
 </script>
 </body>

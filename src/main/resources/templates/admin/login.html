@@ -8,8 +8,6 @@
     <meta name="author" content="" />
     <title>Đăng nhập vào hệ thống</title>
     <link href="/public/admin/css/styles.css" rel="stylesheet" />
-<!--    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>-->
-
 </head>
 <body class="bg-primary">
 <div id="layoutAuthentication">
@@ -23,11 +21,11 @@
                             <div class="card-body">
                                 <div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="username" type="text" placeholder="name@example.com" />
+                                        <input class="form-control" id="username" type="text" placeholder="Tên người dùng" />
                                         <label for="username">Tên người dùng</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="password" type="password" placeholder="Password" />
+                                        <input class="form-control" id="password" type="password" placeholder="Mật khẩu" />
                                         <label for="password">Mật khẩu</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
@@ -36,6 +34,16 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Thêm chức năng đăng nhập bằng khuôn mặt -->
+                        <div class="text-center py-4">
+                            <h5 class="control-group-heading py-2">Hoặc đăng nhập bằng khuôn mặt:</h5>
+                            <button id="faceLoginBtn" class="btn btn-secondary py-3 px-4" type="button">Đăng nhập bằng khuôn mặt</button>
+                            <div id="webcam-container" class="pt-4">
+                                <video id="video" width="320" height="240" autoplay></video>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -43,50 +51,127 @@
     </div>
 </div>
 <script src="/public/admin/js/jquery.js"></script>
-<script src="/public/admin/js/boostrap-bundle.min.js"></script>
+<script src="/public/admin/js/bootstrap-bundle.min.js"></script>
 <script src="/public/admin/js/scripts.js"></script>
-<script type="text/javascript" src="/public/admin/js/datatables.min.js"></script>
-<script src="/public/admin/js/all.min.js"></script>
-<script src="/public/admin/js/ckeditor.js"></script>
+<script src="/public/admin/js/face-api.min.js"></script> <!-- Thêm thư viện face-api.js -->
 
 <script>
 
-
+    // Hàm xử lý đăng nhập thông thường
     function loginAction() {
-
         let username  = document.getElementById('username').value;
         let password  = document.getElementById('password').value;
 
-        if(username=='' || password=='') {
-            alert("Vui lòng nhập đầy đủ thông tin !");
-        } else {
-            var info = {
-                username:username,
-                password:password
-            }
+        if (username === '' || password === '') {
+            alert("Vui lòng nhập đầy đủ thông tin!");
+            return; // Ngừng thực hiện nếu thông tin không đầy đủ
+        }
 
-            $.ajax({
-                url: "http://localhost:8085/api/auth/login",
-                type: "POST",
-                contentType: 'application/json',
-                data: JSON.stringify(info),
-                success: function(data) {
-                    console.log(data)
-                    alert(data.message);
-                    if(data.data!=null) {
-                        window.location.href='/admin/user';
-                    }else {
-                        location.reload();
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    // Xử lý lỗi
-                    console.log("Error:", jqXHR.responseText);
+        var info = {
+            username: username,
+            password: password
+        }
+
+        $.ajax({
+            url: "http://localhost:8085/api/auth/login",
+            type: "POST",
+            contentType: 'application/json',
+            data: JSON.stringify(info),
+            success: function(data) {
+                alert(data.message);
+                if (data.data != null) {
+                    window.location.href = '/admin/user';
+                } else {
+                    location.reload();
                 }
+            },
+            error: function(jqXHR) {
+                console.log("Error:", jqXHR.responseText);
+                alert("Lỗi khi đăng nhập, vui lòng thử lại.");
+            }
+        });
+    }
+
+    // Khởi động webcam
+    async function startVideo() {
+        const video = document.getElementById('video');
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                console.log("Webcam started");
+            })
+            .catch(err => {
+                console.error("Error accessing webcam:", err);
+                alert("Không thể truy cập webcam. Vui lòng kiểm tra quyền truy cập.");
             });
+    }
+
+    // Tải các model của face-api.js
+    async function loadFaceAPIModels() {
+        try {
+            await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
+            await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
+            await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+            await faceapi.nets.ssdMobilenetv1.loadFromUri('/models');
+            console.log("Face API models loaded");
+        } catch (error) {
+            console.error("Error loading models:", error);
+            alert("Lỗi khi tải mô hình nhận diện khuôn mặt.");
         }
     }
 
+    // Xử lý đăng nhập bằng khuôn mặt
+    async function handleFaceLogin() {
+        const video = document.getElementById('video');
+        const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
+
+        if (detections && detections.descriptor) {
+            const faceDescriptor = detections.descriptor;
+            console.log("Face detected:", faceDescriptor);
+
+            // Gửi thông tin descriptor tới server
+            $.ajax({
+                url: "http://localhost:8085/api/auth/login/face",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({ descriptor: faceDescriptor }),
+                success: function(data) {
+                    if (data.success) {
+                        alert("Đăng nhập thành công!");
+                        window.location.href = '/admin/user';
+                    } else {
+                        alert("Khuôn mặt không khớp, vui lòng thử lại.");
+                    }
+                },
+                error: function(jqXHR) {
+                    console.log("Error:", jqXHR.responseText);
+                    alert("Lỗi xảy ra khi xử lý nhận diện khuôn mặt.");
+                }
+            });
+        } else {
+            alert("Không thể nhận diện khuôn mặt, vui lòng thử lại.");
+        }
+    }
+
+    // Bắt sự kiện khi nhấn nút "Đăng nhập bằng khuôn mặt"
+    document.getElementById('faceLoginBtn').addEventListener('click', () => {
+        startVideo();
+        loadFaceAPIModels().then(() => {
+            const video = document.getElementById('video');
+            video.addEventListener('play', () => {
+                const interval = setInterval(async () => {
+                    await handleFaceLogin();
+                }, 3000); // Thực hiện kiểm tra khuôn mặt mỗi 3 giây
+
+                // Dừng kiểm tra khi video dừng
+                video.addEventListener('pause', () => {
+                    clearInterval(interval);
+                });
+            });
+        });
+    });
+
 </script>
+
 </body>
 </html>
