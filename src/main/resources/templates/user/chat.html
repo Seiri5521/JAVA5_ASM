@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat with Gemini</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+<style>
+body {
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+	<h1>Gemini AI Chat</h1>
+
+	<form action="/chat/ask" method="POST">
+		<label for="question">Nhập câu hỏi:</label> <input type="text"
+			id="question" name="question" required>
+		<button type="submit">Gửi</button>
+	</form>
+
+	<div>
+		<h2>Trả lời từ AI:</h2>
+		<p th:text="${response}"></p>
+	</div>
+
+</body>
+</html>
