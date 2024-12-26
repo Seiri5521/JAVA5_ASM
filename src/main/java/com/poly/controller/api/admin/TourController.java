@@ -5,7 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -76,27 +77,27 @@ public class TourController {
         return new ResponseDTO("Thất bại" ,null);
     }
 
-    @PostMapping("/test-up-anh")
-    public ResponseDTO testUpAnh(@RequestParam("image")MultipartFile image) {
-
-        if(!this.userService.checkAdminLogin()) {
-            return new ResponseDTO("Không có quyền truy cập",null);
-        }
-
-        String uploadDir = "TourIMG/src/main/resources/static/public/img";
-
-        try {
-            // Lưu ảnh vào thư mục "upload"
-            String fileName = UUID.randomUUID().toString()+ image.getOriginalFilename();
-            FileUploadUtil.saveFile(uploadDir, fileName, image);
-
-            return new ResponseDTO("Thành công",fileName);
-        } catch (IOException  e) {
-            // Xử lý exception
-            log.info("Lỗi upload file: {}",e.getMessage());
-        }
-        return new ResponseDTO("Thêm thất bại",null);
-    }
+//    @PostMapping("/test-up-anh")
+//    public ResponseDTO testUpAnh(@RequestParam("image")MultipartFile image) {
+//
+//        if(!this.userService.checkAdminLogin()) {
+//            return new ResponseDTO("Không có quyền truy cập",null);
+//        }
+//
+//        String uploadDir = "TourIMG/src/main/resources/static/public/img";
+//
+//        try {
+//            // Lưu ảnh vào thư mục "upload"
+//            String fileName = UUID.randomUUID().toString()+ image.getOriginalFilename();
+//            FileUploadUtil.saveFile(uploadDir, fileName, image);
+//
+//            return new ResponseDTO("Thành công",fileName);
+//        } catch (IOException  e) {
+//            // Xử lý exception
+//            log.info("Lỗi upload file: {}",e.getMessage());
+//        }
+//        return new ResponseDTO("Thêm thất bại",null);
+//    }
 
     @PostMapping("/add/image")
     public ResponseDTO createTourImage(@RequestParam("image")MultipartFile image) {
@@ -105,13 +106,13 @@ public class TourController {
             return new ResponseDTO("Không có quyền truy cập",null);
         }
 
-        String uploadDir = "TourIMG/src/main/resources/static/public/img";
+        String uploadDir = "src/main/resources/static/public/img";
 
         Tour tour = tourService.findFirstByOrderByIdDesc();
 
         try {
             // Lưu ảnh vào thư mục "upload"
-            String fileName = UUID.randomUUID().toString()+ image.getOriginalFilename();
+            String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
             FileUploadUtil.saveFile(uploadDir, fileName, image);
 
             // Lưu thông tin của tour vào cơ sở dữ liệu
@@ -120,6 +121,9 @@ public class TourController {
         } catch (IOException  e) {
             // Xử lý exception
             log.info("Lỗi upload file: {}",e.getMessage());
+        }catch (Exception e) {
+            log.error("Lỗi không xác định: {}", e.getMessage(), e);
+            return new ResponseDTO("Lỗi không xác định: " + e.getMessage(), null);
         }
         return new ResponseDTO("Thêm thất bại",null);
     }
@@ -152,12 +156,12 @@ public class TourController {
             return new ResponseDTO("Không có quyền truy cập",null);
         }
 
-        String uploadDir = "TourIMG/src/main/resources/static/public/img";
+        String uploadDir = "src/main/resources/static/public/img";
 
         TourDTO tourDTO = this.tourService.findTourById(id);
         try {
             // Lưu ảnh vào thư mục "upload"
-            String fileName = UUID.randomUUID().toString()+ image.getOriginalFilename();
+            String fileName = image.getOriginalFilename();
             FileUploadUtil.saveFile(uploadDir, fileName, image);
 
             // Lưu thông tin của tour vào cơ sở dữ liệu
@@ -220,32 +224,45 @@ public class TourController {
     }
 
     @PostMapping("/add-image/{id}")
-    public ResponseDTO addImage(@PathVariable("id") Long id,@RequestParam("image") MultipartFile image) {
+    public ResponseEntity<ResponseDTO> addImage(@PathVariable("id") Long id, @RequestParam("image") MultipartFile image) {
 
-        if(!this.userService.checkAdminLogin()) {
-            return new ResponseDTO("Không có quyền truy cập",null);
+        // Kiểm tra quyền truy cập
+        if (!this.userService.checkAdminLogin()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(new ResponseDTO("Không có quyền truy cập", null));
         }
 
-        String uploadDir = "TourIMG/src/main/resources/static/public/img";
+        // Thư mục lưu trữ ảnh
+        String uploadDir = "src/main/resources/static/public/img";
 
         try {
-            // Lưu ảnh vào thư mục "upload"
-            String fileName = UUID.randomUUID()+image.getOriginalFilename();
+            // Tạo tên file ngẫu nhiên và lưu file
+            String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
             FileUploadUtil.saveFile(uploadDir, fileName, image);
 
-            if(this.tourService.findTourById(id)!=null) {
-
-                return new ResponseDTO("Thêm thành công",this.imageService.addToTour(id,fileName));
+            // Kiểm tra tồn tại của tour
+            if (this.tourService.findTourById(id) != null) {
+                // Lưu ảnh vào tour và trả về phản hồi
+                Object savedImage = this.imageService.addToTour(id, fileName);
+                return ResponseEntity.ok(new ResponseDTO("Thêm thành công", savedImage));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO("Tour không tồn tại", null));
             }
-        } catch (IOException  e) {
-            // Xử lý exception
-            log.info("Lỗi upload file: {}",e.getMessage());
+        } catch (IOException e) {
+            // Log lỗi chi tiết và trả về phản hồi lỗi
+            log.error("Lỗi upload file: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO("Lỗi khi xử lý file", null));
+        } catch (Exception e) {
+            // Log lỗi không mong muốn khác
+            log.error("Lỗi không xác định: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO("Lỗi không xác định", null));
         }
-
-        return new ResponseDTO("Lỗi khi thêm",null);
-
     }
 
+    
     @GetMapping("/StartDate/{id}")
     public ResponseDTO getAllStartDate(@PathVariable("id") Long id) {
 

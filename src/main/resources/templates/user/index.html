@@ -361,7 +361,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container container-2">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="carousel-destination owl-carousel ftco-animate">
@@ -449,6 +449,7 @@
 							<h3>
 								<a href="#" th:href="@{/tour/{id}(id=${tour.id})}"
 									th:text="${tour.ten_tour}"></a>
+									<a th:text="${tour.anh_tour}"></a>
 							</h3>
 							<p class="location">
 								<span class="fa fa-map-marker"></span> [[${tour.diem_den}]]
@@ -464,7 +465,7 @@
 				<div class="col-md-4 ftco-animate">
 					<div class="project-wrap">
 						<a href="#" class="img"
-							style="background-image: url(public/images/destination-2.jpg);">
+							style="background-image: url(public/images/destination-6.jpg);">
 							<span class="price">4.879.000 VNĐ</span>
 						</a>
 						<div class="text p-4">
