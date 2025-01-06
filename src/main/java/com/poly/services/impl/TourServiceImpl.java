@@ -40,19 +40,20 @@ public class TourServiceImpl implements TourService {
 		TourDTO tourDTO = this.tourRepository.findTourById(id);
 
 		Calendar calendar = Calendar.getInstance();
+		
 		calendar.setTime(tourDTO.getNgay_khoi_hanh());
+		
 		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		
 		tourDTO.setNgay_khoi_hanh(calendar.getTime());
 
-
 		calendar.setTime(tourDTO.getNgay_ket_thuc());
+		
 		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		
 		tourDTO.setNgay_ket_thuc(calendar.getTime());
 
-		if(tourDTO!=null) {
-			return tourDTO;
-		}
-		return null;
+		return tourDTO;
 	}
 
 	@Override
