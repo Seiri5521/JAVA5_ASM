@@ -22,6 +22,7 @@ import com.poly.services.UserService;
 import com.poly.utilites.DateUtils;
 import com.poly.utilites.FileUploadUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -233,8 +234,14 @@ public class TourController {
         }
 
         // Thư mục lưu trữ ảnh
-        String uploadDir = "src/main/resources/static/public/img";
+        String uploadDir = "TourIMG/public/img";
 
+        // Tạo thư mục nếu chưa tồn tại
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        
         try {
             // Tạo tên file ngẫu nhiên và lưu file
             String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
