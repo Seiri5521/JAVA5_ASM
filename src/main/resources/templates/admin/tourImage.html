@@ -1,121 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Quản lý ảnh tour</title>
-    <link rel="stylesheet" href="/public/admin/css/fontawesome.min.css">
-    <!--    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />-->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Quản lý ảnh tour</title>
+<link rel="stylesheet" href="/public/admin/css/fontawesome.min.css">
+<!--    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />-->
 <!--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>-->
-    <link rel="stylesheet" type="text/css" href="/public/admin/css/datatables.min.css"/>
-    <link href="/public/admin/css/styles.css" rel="stylesheet" />
-    <!--    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>-->
+<link rel="stylesheet" type="text/css"
+	href="/public/admin/css/datatables.min.css" />
+<link href="/public/admin/css/styles.css" rel="stylesheet" />
+<!--    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>-->
 </head>
 <body class="sb-nav-fixed">
 
-<div th:replace="fragments/topnav :: topnav"></div>
+	<div th:replace="fragments/topnav :: topnav"></div>
 
-<div id="layoutSidenav">
+	<div id="layoutSidenav">
 
-    <div th:replace="fragments/sidebar :: sidebar"></div>
-    
-    <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid px-4">
-                <h1 id="id_tour_set_title" class="mt-4">Danh sách ảnh slide</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Quản lý slide</li>
-                </ol>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        Bảng dữ liệu ảnh slide
-                    </div>
-                    <div class="">
-                        <button class="btn btn-primary m-4" data-toggle="modal" onclick="addTourStartModel()" data-target="#addTourModal">Thêm ảnh slide cho tour</button>
-                    </div>
-                    <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Ảnh</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Ảnh</th>
-                                <th>Action</th>
-                            </tr>
-                            </tfoot>
-                            <tbody >
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<h1 id="id_tour_set_title" class="mt-4">Danh sách ảnh slide</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item"><a href="index.html">Trang
+								chủ</a></li>
+						<li class="breadcrumb-item active">Quản lý slide</li>
+					</ol>
+					<div class="card mb-4">
+						<div class="card-header">
+							<i class="fas fa-table me-1"></i> Bảng dữ liệu ảnh slide
+						</div>
+						<div class="">
+							<button class="btn btn-primary m-4" data-toggle="modal"
+								onclick="addTourStartModel()" data-target="#addTourModal">Thêm
+								ảnh slide cho tour</button>
+						</div>
+						<div class="card-body">
+							<table id="datatablesSimple">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Ảnh</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>ID</th>
+										<th>Ảnh</th>
+										<th>Action</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+								</tbody>
+							</table>
 
 
-                            </tbody>
-                        </table>
+							<div class="modal fade" id="addStartDateModal" tabindex="-1"
+								aria-labelledby="addModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content p-4">
+										<div class="modal-header">
+											<h5 class="modal-title p-2" id="addModalLabel">Thêm mới ảnh</h5>
+										</div>
+										<div class="modal-body">
+											<form id="addTourForm">
+												<input type="hidden" name="id" value="id">
+												<div class="form-group">
+													<label for="image">Chọn ảnh</label> <input type="file"
+														id="image" required class="form-control datepicker"
+														name="image"> <img src="" alt=""
+														style="width: 50%; padding: 4px 0;" id="anh_tour_view">
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger"
+												onclick="hideAddModal()" data-dismiss="modal">Đóng</button>
+											<button type="button" class="btn btn-primary"
+												onclick="submitAddForm()">Thêm mới</button>
+										</div>
+									</div>
+								</div>
+							</div>
 
-
-                        <div class="modal fade"  id="addStartDateModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content p-4">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title p-2" id="addModalLabel">Thêm mới ảnh</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="addTourForm">
-                                            <input type="hidden"  name="id" value="id">
-                                            <div class="form-group">
-                                                <label for="image">Chọn ảnh</label>
-                                                <input type="file"  id="image" required class="form-control datepicker" name="image">
-                                                <img src="" alt="" style="width: 50%; padding: 4px 0;" id="anh_tour_view">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" onclick="hideAddModal()" data-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary" onclick="submitAddForm()">Thêm mới</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Xóa ảnh</h5>
-                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <input type="hidden" id="deleteId" name="deleteId" value="deleteId">
-                                    <div class="modal-body">
-                                        <p>Bạn có chắc chắn muốn xóa ảnh này?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" onclick="hideDeleteModal()" data-dismiss="modal">Hủy</button>
-                                        <button type="button" class="btn btn-danger" data-id="" onclick="deleteUserAction()" id="confirmDeleteBtn">Xóa</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-</div>
-<script src="/public/admin/js/jquery.js"></script>
-<script src="/public/admin/js/boostrap-bundle.min.js"></script>
-<script src="/public/admin/js/scripts.js"></script>
-<script type="text/javascript" src="/public/admin/js/datatables.min.js"></script>
-<script src="/public/admin/js/all.min.js"></script>
-<script src="/public/admin/js/ckeditor.js"></script>
-<script>
+							<div class="modal fade" id="deleteModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Xóa ảnh</h5>
+											<button type="button" class="btn-close" data-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<input type="hidden" id="deleteId" name="deleteId"
+											value="deleteId">
+										<div class="modal-body">
+											<p>Bạn có chắc chắn muốn xóa ảnh này?</p>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												onclick="hideDeleteModal()" data-dismiss="modal">Hủy</button>
+											<button type="button" class="btn btn-danger" data-id=""
+												onclick="deleteUserAction()" id="confirmDeleteBtn">Xóa</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+	<script src="/public/admin/js/jquery.js"></script>
+	<script src="/public/admin/js/boostrap-bundle.min.js"></script>
+	<script src="/public/admin/js/scripts.js"></script>
+	<script type="text/javascript" src="/public/admin/js/datatables.min.js"></script>
+	<script src="/public/admin/js/all.min.js"></script>
+	<script src="/public/admin/js/ckeditor.js"></script>
+	<script>
 
     function hideModal() {
         $("#editModal").modal('hide');
@@ -145,25 +157,32 @@
 
         let image = document.getElementById("image").files[0];
 
-        formData.append("image",image);
+        formData.append("image", image);
 
+        // Kiểm tra dữ liệu formData
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
 
         $.ajax({
-            url: "http://localhost:8085/api/tour/add-image/"+tour_id,
+            url: "http://localhost:8085/api/tour/add-image/" + tour_id,
             type: "POST",
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response){
-                alert("Thêm mới thành công !")
+            success: function (response) {
+                alert("Thêm mới thành công !");
+                console.log("Response từ server:", response); // Log phản hồi từ server
                 location.reload();
             },
-            error: function(jqXHR, textStatus, errorThrown){
-                console.log(textStatus, errorThrown);
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Lỗi:", textStatus, errorThrown);
+                console.log("Chi tiết lỗi:", jqXHR.responseText); // Log chi tiết lỗi từ server
             }
         });
     }
 
+    
     function addTourStartModel() {
         $('#addStartDateModal').modal('show');
     }
@@ -208,30 +227,32 @@
         document.getElementById('id_tour_set_title').innerHTML = "Danh sách ảnh slide của tour id : " +id;
 
         console.log(id);
-
-        $('#datatablesSimple').DataTable({
+        
+         $('#datatablesSimple').DataTable({
             "ajax": {
-                "url": "http://localhost:8085/api/tour/getAllImageOfTour/"+id,
-                "dataSrc": "data"
+                "url": "http://localhost:8085/api/tour/getAllImageOfTour/" + id,
+                "dataSrc": function (json) {
+                    console.log("Dữ liệu từ API:", json.data); // Log dữ liệu từ API
+                    return json.data; // Trả dữ liệu cho DataTables
+                }
             },
             "columns": [
                 { "data": "id" },
-                { "data": "url" ,"render": function ( data, type, row ) {
-                        return  `<img src="/public/img/${data}" style="width: 200px; height: 140px;" />`;
-                    }
+                { "data": "url", "render": function (data, type, row) {
+                    console.log("Dữ liệu của dòng:", row); // Log dữ liệu của dòng hiện tại
+                    return `<img src="/public/img/${data}" style="width: 200px; height: 140px;" />
+                    		<a th:text="${data}"></a>`;
+                }
                 },
                 {
                     "data": null,
-                    "render": function ( data, type, row ) {
-                        return  '<button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm mx-2" onclick="deleteUser('+data.id+')">Xóa</button>';
+                    "render": function (data, type, row) {
+                        return '<button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm mx-2" onclick="deleteUser(' + data.id + ')">Xóa</button>';
                     }
                 }
             ]
-        } );
-
-
-
-
+        });
+        
         function deleteUser(id) {
             // Hiển thị modal xác nhận xóa user
             $('#deleteModal input[name="id"]').val(id);

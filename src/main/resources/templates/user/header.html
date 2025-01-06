@@ -1,47 +1,106 @@
+
 <header th:fragment="header">
+
 	<!-- Topbar Start -->
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="/">Pacific<span>Công Ty Du
-					Lịch</span></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+		<div class="container" id="topbar">
+			<a class="navbar-brand" href="/">Pacific<span>Công Ty Du Lịch</span></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="/" class="nav-link">Trang
-							Chủ</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Điểm đến </a>
+					<li class="nav-item active"><a href="/" class="nav-link" th:text="#{menu.trangchu}"></a></li>
+
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{menu.diemden}"></a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="/tour/trong-nuoc">Tour Miền Bắc</a> 
-							<a class="dropdown-item" href="/tour/ngoai-nuoc">Tour Miền Trung</a> 
-							<a class="dropdown-item" href="/tour/mien-nam">Tour Miền Nam</a>
-						</div></li>
+							<a class="dropdown-item" href="/tour/trong-nuoc" th:text="#{menu.tourmienbac}"></a> 
+							<a class="dropdown-item"href="/tour/ngoai-nuoc" th:text="#{menu.tourmientrung}"></a>
+							<a class="dropdown-item" href="/tour/mien-nam" th:text="#{menu.tourmiennam}"></a>
+						</div>
+					</li>
 
+					<li class="nav-item">
+						<a href="/tin-tuc" class="nav-link"th:text="#{menu.tintuc}"></a>
+					</li>
+					
+					<li class="nav-item">
+						<a href="/about" class="nav-link" th:text="#{menu.gioithieu}"></a>
+					</li>
+					
+					<li class="nav-item">
+						<a href="/contact" class="nav-link" th:text="#{menu.lienhe}"></a>
+					</li>
+					
+					<li class="nav-item">
+						<a href="/account" class="nav-link" th:text="#{menu.taikhoan}"></a>
+					</li>
 
-					<!-- <li class="nav-item"><a href="destination.html"
-						class="nav-link">Điểm Đến</a></li> -->
-					<!-- 					<li class="nav-item"><a href="hotel.html" class="nav-link">Khách
-							Sạn</a></li> -->
-					<li class="nav-item"><a href="/tin-tuc" class="nav-link">Tin
-							tức</a></li>
-					<li class="nav-item"><a href="/about" class="nav-link">Giới
-							Thiệu</a></li>
-					<li class="nav-item"><a href="/contact" class="nav-link">Liên
-							Hệ</a></li>
-					<li class="nav-item"><a href="/account" class="nav-link">Tài
-							khoản</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+							<span id="currentLanguage" th:text="#{menu.ngonngu}"></span> 
+						</a>
+	
+						<div class="dropdown-menu" aria-labelledby="languageDropdown">
+							<a class="dropdown-item" href="?lang=vi"> 
+								<img src="/public/images/coVietNam.png" width="25" height="15" th:text="#{menu.tiengviet}">
+							</a> 
+								
+							<a class="dropdown-item" href="?lang=en"> 
+								<img src="/public/images/coNuocAnh.png" width="25" height="15" th:text="#{menu.tienganh}">
+							</a> 
+								
+							<a class="dropdown-item" href="?lang=ja"> 
+								<img src="/public/images/OIP.jpg" width="25" height="15" th:text="#{menu.tiengnhat}">
+							</a>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- Navbar End -->
 </header>
+
+<script>
+    // Hàm để lấy giá trị của cookie theo tên
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Đọc ngôn ngữ từ cookie và hiển thị
+    $(document).ready(function() {
+        var lang = getCookie('lang');
+        var languageText = '';
+
+        if (lang === 'vi') {
+            languageText = 'Tiếng Việt';
+        } else if (lang === 'en') {
+            languageText = 'Tiếng Anh';
+        } else if (lang === 'ja') {
+            languageText = 'Tiếng Nhật';
+        } else {
+            languageText = 'Chọn ngôn ngữ'; // Giá trị mặc định
+        }
+
+        $('#currentLanguage').text(languageText); // Hiển thị ngôn ngữ hiện tại
+    });
+</script>
+
+<script>
+	$(document).ready(function() {
+		$("a[href*=lang]").on("click", function() {
+			var param = $(this).attr("href");
+			$.ajax({
+				url : "/home/index" + param,
+				success : function() {
+					location.reload();
+				}
+			});
+			return false;
+		})
+	})
+</script>

@@ -41,7 +41,7 @@ CREATE TABLE tour (
     ngay_ket_thuc DATE,
     diem_den NVARCHAR(255),
     loai_tour INT,
-    anh_tour NVARCHAR(255),
+    anh_tour NVARCHAR(max),
     diem_khoi_hanh NVARCHAR(255),
     trang_thai INT,
     gia_tour BIGINT
@@ -50,7 +50,7 @@ CREATE TABLE tour (
 -- Tạo bảng Image
 CREATE TABLE image (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    url NVARCHAR(500) NOT NULL,
+    url NVARCHAR(max) NOT NULL,
     tour_id BIGINT NOT NULL,
     CONSTRAINT FK_Image_Tour FOREIGN KEY (tour_id) REFERENCES Tour(id)
 );
