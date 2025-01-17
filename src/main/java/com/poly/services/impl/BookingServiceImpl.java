@@ -46,10 +46,10 @@ public class BookingServiceImpl implements BookingService{
 	public boolean addNewBooking(BookingDTO newBooking) {
 
 
-		List<BookingDTO> checkBooking  = this.bookingRepository.checkBookingByUserId(newBooking.getUser_id());
-		if(checkBooking.size()>0) {
-			return false;
-		}
+//		List<BookingDTO> checkBooking  = this.bookingRepository.checkBookingByUserId(newBooking.getUser_id());
+//		if(checkBooking.size()>0) {
+//			return false;
+//		}
 
 		TourDTO tourDTO = this.tourRepository.findTourById(newBooking.getTour_id());
 
